@@ -15,10 +15,10 @@
 #  [*puppetlabs-stdlib*](https://github.com/puppetlabs/puppetlabs-stdlib)
 #
 class resolv_conf(
-  Array $nameservers,
+  Array $nameservers = lookup('resolv_conf::nameservers', Array, {'strategy' => 'deep'}),
   $domainname = undef,
   $searchpath = [],
-  $options = undef,
+  $options = lookup('resolv_conf::options', Array, {'strategy' => 'deep'}, []),
   String $config_file = $resolv_conf::params::config_file
 ) inherits resolv_conf::params {
 
